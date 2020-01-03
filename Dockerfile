@@ -37,7 +37,7 @@ RUN \
  rm -rf /var/cache/apk/* &&\
  cd /tmp && rm -rf /tmp/*
 
-VOLUME ["${BASE_DIR}/tmp", "${BASE_DIR/data/mysql", "${BASE_DIR}/logs"]
+VOLUME ["${BASE_DIR}/tmp", "${BASE_DIR}/data/mysql", "${BASE_DIR}/logs"]
 
 EXPOSE 3306
 
