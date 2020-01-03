@@ -1,9 +1,9 @@
-# Docker Alpine MySQL
+# Docker Debian MySQL
 
 ## 环境
 
 ```
-alpine: ^3.11
+debian: ^10.2
 mysql: 5.7.28
 ```
 
