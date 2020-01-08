@@ -14,7 +14,7 @@ mariadb: ^10.4
 $ docker pull seffeng/mysql
 
 # 运行
-$ docker run --name mysql-test -d -v <data-dir>:/opt/websrv/data/mysql -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/mysql
+$ docker run --name mysql-test -d -p <port>:3306 -v <data-dir>:/opt/websrv/data/mysql -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/mysql
 
 # 查看正在运行的容器
 $ docker ps
