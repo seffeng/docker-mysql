@@ -37,3 +37,10 @@ $ docker images
 # 删除镜像
 $ docker rmi [IMAGE ID]
 ```
+
+## 备注
+
+```
+# mysql 初始账号：root；初始密码：root
+```
+
