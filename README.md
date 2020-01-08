@@ -1,10 +1,10 @@
-# Docker Debian MySQL
+# Docker Alpine MariaDB
 
 ## 环境
 
 ```
-debian: ^10.2
-mysql: 5.7.28
+alpine: ^3.11
+mariadb: ^10.4
 ```
 
 ## 常用命令：
