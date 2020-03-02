@@ -122,7 +122,7 @@ $ mysql -u root < initdb
 $ /etc/init.d/mysql.server stop && rm -f initdb
 $ exit # 容器内操作完成，退出容器
 
-$ mkdir -p /srv/websrv/logs && chmod 777 /srv/websrv/logs
+$ mkdir -p /srv/websrv/tmp && chmod 777 /srv/websrv/tmp
 #运行新容器
 $ docker run --name mysql-alias1 -d -p 3306:3306 -v /srv/websrv/data/mysql:/opt/websrv/data/mysql -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql
 ```
