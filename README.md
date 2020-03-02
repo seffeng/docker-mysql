@@ -74,7 +74,7 @@ $ mkdir -p <tmp-dir> && chmod 777 <tmp-dir>
 $ docker run --name mysql-test -d -p <port>:3306 -v /data/mysql:/opt/websrv/data/mysql -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/mysql
 ```
 
-##### 方法二：
+##### 方法二（建议）：
 
 1、运行
 
@@ -107,5 +107,23 @@ $ mkdir -p <tmp-dir> && chmod 777 <tmp-dir>
 
 ```shell
 $ docker run --name mysql-test -d -p <port>:3306 -v <data-dir>:/opt/websrv/data/mysql -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/mysql
+```
+
+6、完整示例
+
+```shell
+$ docker run --name mysql-tmp -it -v /srv/websrv/data/mysql:/opt/websrv/data/mysql seffeng/mysql sh
+
+# 容器内操作
+$ mysql_install_db --user=mysql --datadir=/opt/websrv/data/mysql --skip-test-db
+$ /etc/init.d/mysql.server start
+echo -e "USE mysql;\nGRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;\nDROP USER 'root'@'localhost';\nDROP USER 'mysql'@'localhost';\nFLUSH PRIVILEGES;\n" > initdb
+$ mysql -u root < initdb
+$ /etc/init.d/mysql.server stop && rm -f initdb
+$ exit # 容器内操作完成，退出容器
+
+$ mkdir -p /srv/websrv/logs && chmod 777 /srv/websrv/logs
+#运行新容器
+$ docker run --name mysql-alias1 -d -p 3306:3306 -v /srv/websrv/data/mysql:/opt/websrv/data/mysql -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql
 ```
 
