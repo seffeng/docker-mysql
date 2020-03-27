@@ -9,7 +9,7 @@ ENV CONFIG_DIR="${BASE_DIR}/config/mysql"
 WORKDIR /tmp
 COPY    conf ./conf
 
-RUN apk add --update --no-cache mysql &&\
+RUN apk add --update --no-cache mariadb mariadb-client &&\
  mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR} ${BASE_DIR}/data/mysql &&\
  chmod 777 ${BASE_DIR}/tmp &&\
  chmod 777 ${BASE_DIR}/logs &&\
@@ -18,7 +18,7 @@ RUN apk add --update --no-cache mysql &&\
  ln -s ${CONFIG_DIR}/my.cnf /etc/my.cnf &&\
  mysql_install_db --user=mysql --datadir=${BASE_DIR}/data/mysql --skip-test-db > /dev/null &&\
  cp -f /usr/share/mariadb/mysql.server /etc/init.d/mysql.server &&\
- /etc/init.d/mysql.server restart &&\
+ /etc/init.d/mysql.server start &&\
  echo -e "USE mysql;\nGRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;\nDROP USER 'root'@'localhost';\nDROP USER 'mysql'@'localhost';\nFLUSH PRIVILEGES;\n" > initdb &&\
  mysql -u root < initdb &&\
  /etc/init.d/mysql.server stop &&\
