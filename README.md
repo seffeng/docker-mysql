@@ -43,7 +43,14 @@ $ docker rmi [IMAGE ID]
 ```
 # mysql 初始账号：root；初始密码：root
 ```
+```shell
+# 建议容器之间使用网络互通
+## 1、添加网络[已存在则跳过此步骤]
+$ docker network create network-01
 
+## 运行容器增加 --network network-01 --network-alias [name-net-alias]
+$ docker run --name mysql-alias1 --network network-01 --network-alias mysql-alias1 -d -p 3306:3306 -v /srv/websrv/data/mysql:/opt/websrv/data/mysql -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql
+```
 #### 若需要链接容器外部数据库目录`<data-dir>`，操作步骤如下：
 
 ##### 方法一：
