@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  mysql-1:
+    container_name: "mysql-alias1"
+    image: "seffeng/mysql"
+    ports:
+      - "3306:3306"
+    networks:
+      network-01:
+        aliases:
+          - mysql-net1
+    volumes:
+      - "/srv/websrv/data/mysql:/opt/websrv/data/mysql"
+      - "/srv/websrv/tmp:/opt/websrv/tmp"
+      - "/srv/websrv/logs/mysql:/opt/websrv/logs"
+
+networks:
+  network-01:
+    driver: bridge
+    name: network-01
