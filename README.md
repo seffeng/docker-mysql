@@ -3,7 +3,7 @@
 ## 环境
 
 ```
-alpine: ^3.11
+alpine: ^3.13
 mariadb: ^10.4
 ```
 
@@ -49,7 +49,7 @@ $ docker rmi [IMAGE ID]
 $ docker network create network-01
 
 ## 运行容器增加 --network network-01 --network-alias [name-net-alias]
-$ docker run --name mysql-alias1 --network network-01 --network-alias mysql-alias1 -d -p 3306:3306 -v /srv/websrv/data/mysql:/opt/websrv/data/mysql -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql
+$ docker run --name mysql-alias1 --network network-01 --network-alias mysql-alias1 -d -p 3306:3306 -v /opt/websrv/data/mysql:/opt/websrv/data/mysql -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql
 ```
 #### 若需要链接容器外部数据库目录`<data-dir>`，操作步骤如下：
 
@@ -119,7 +119,7 @@ $ docker run --name mysql-test -d -p <port>:3306 -v <data-dir>:/opt/websrv/data/
 6、完整示例
 
 ```shell
-$ docker run --name mysql-tmp -it -v /srv/websrv/data/mysql:/opt/websrv/data/mysql seffeng/mysql sh
+$ docker run --name mysql-tmp -it -v /opt/websrv/data/mysql:/opt/websrv/data/mysql seffeng/mysql sh
 
 # 容器内操作
 $ mysql_install_db --user=mysql --datadir=/opt/websrv/data/mysql --skip-test-db
@@ -129,8 +129,8 @@ $ mysql -u root < initdb
 $ /etc/init.d/mysql.server stop && rm -f initdb
 $ exit # 容器内操作完成，退出容器
 
-$ mkdir -p /srv/websrv/tmp && chmod 777 /srv/websrv/tmp
+$ mkdir -p /opt/websrv/tmp && chmod 777 /opt/websrv/tmp
 #运行新容器
-$ docker run --name mysql-alias1 -d -p 3306:3306 -v /srv/websrv/data/mysql:/opt/websrv/data/mysql -v /srv/websrv/tmp:/opt/websrv/tmp -v /srv/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql
+$ docker run --name mysql-alias1 -d -p 3306:3306 -v /opt/websrv/data/mysql:/opt/websrv/data/mysql -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql
 ```
 
