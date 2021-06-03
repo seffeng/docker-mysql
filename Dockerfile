@@ -39,7 +39,6 @@ RUN \
  ln -s ${INSTALL_DIR}/bin/mysqlslap /usr/bin/mysqlslap &&\
  ln -s ${INSTALL_DIR}/bin/mysqld_safe /usr/bin/mysqld_safe &&\
  apt -y remove ${BASE_PACKAGE} &&\
- apt -y autoremove &&\
  apt clean &&\
  rm -rf /var/cache/apt/* &&\
  cd /tmp && rm -rf /tmp/*
