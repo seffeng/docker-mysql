@@ -11,9 +11,9 @@ services:
         aliases:
           - mysql-net1
     volumes:
-      - "/srv/websrv/data/mysql:/opt/websrv/data/mysql"
-      - "/srv/websrv/tmp:/opt/websrv/tmp"
-      - "/srv/websrv/logs/mysql:/opt/websrv/logs"
+      - "/opt/websrv/data/mysql:/opt/websrv/data/mysql"
+      - "/opt/websrv/tmp:/opt/websrv/tmp"
+      - "/opt/websrv/logs/mysql:/opt/websrv/logs"
 
 networks:
   network-01:
