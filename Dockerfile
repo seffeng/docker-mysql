@@ -15,7 +15,7 @@ WORKDIR /tmp
 COPY    conf ./conf
 
 RUN \
- apt-get update && apt-get -y install ${BASE_PACKAGE} &&\
+ apt update && apt -y install ${BASE_PACKAGE} &&\
  wget ${MYSQL_URL} &&\
  tar -zxf mysql-boost-${MYSQL_VERSION}.tar.gz &&\
  mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR} ${INSTALL_DIR} ${BASE_DIR}/data/mysql &&\
@@ -38,9 +38,9 @@ RUN \
  ln -s ${INSTALL_DIR}/bin/mysqlshow /usr/bin/mysqlshow &&\
  ln -s ${INSTALL_DIR}/bin/mysqlslap /usr/bin/mysqlslap &&\
  ln -s ${INSTALL_DIR}/bin/mysqld_safe /usr/bin/mysqld_safe &&\
- apt-get -y remove ${BASE_PACKAGE} &&\
- apt autoremove &&\
- apt-get clean &&\
+ apt -y remove ${BASE_PACKAGE} &&\
+ apt -y autoremove &&\
+ apt clean &&\
  rm -rf /var/cache/apt/* &&\
  cd /tmp && rm -rf /tmp/*
 
