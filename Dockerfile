@@ -30,6 +30,7 @@ RUN \
  ${INSTALL_DIR}/bin/mysqld --initialize-insecure --user=mysql --basedir=${INSTALL_DIR} --datadir=${BASE_DIR}/data/mysql &&\
  ${INSTALL_DIR}/bin/mysql_ssl_rsa_setup --datadir=${BASE_DIR}/data/mysql &&\
  ln -s ${INSTALL_DIR}/bin/mysql /usr/bin/mysql &&\
+ ln -s ${INSTALL_DIR}/bin/mysqld /usr/bin/mysqld &&\
  ln -s ${INSTALL_DIR}/bin/mysqladmin /usr/bin/mysqladmin &&\
  ln -s ${INSTALL_DIR}/bin/mysqlbinlog /usr/bin/mysqlbinlog &&\
  ln -s ${INSTALL_DIR}/bin/mysqlcheck /usr/bin/mysqlcheck &&\
