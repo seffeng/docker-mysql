@@ -15,7 +15,7 @@ WORKDIR /tmp
 COPY    conf ./conf
 
 RUN \
- apt-get update && apt-get -y --no-install-recommends install ${BASE_PACKAGE} &&\
+ apt-get update && apt-get -y install ${BASE_PACKAGE} &&\
  wget ${MYSQL_URL} &&\
  tar -zxf mysql-boost-${MYSQL_VERSION}.tar.gz &&\
  mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR} ${INSTALL_DIR} ${BASE_DIR}/data/mysql &&\
