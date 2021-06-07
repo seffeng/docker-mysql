@@ -2,7 +2,7 @@ FROM seffeng/debian:latest
 
 MAINTAINER seffeng "seffeng@sina.cn"
 
-ARG BASE_DIR="/opt/websrv"
+ENV BASE_DIR="/opt/websrv"
 
 ENV MYSQL_VERSION=mysql-8.0.25-linux-glibc2.17-x86_64-minimal\
  CONFIG_DIR="${BASE_DIR}/config/mysql"\
@@ -14,6 +14,7 @@ ENV MYSQL_URL="https://dev.mysql.com/get/Downloads/MySQL-8.0/${MYSQL_VERSION}.ta
 
 WORKDIR /tmp
 COPY    conf ./conf
+COPY    docker-entrypoint.sh /usr/local/bin/
 
 RUN \
  apt-get update && apt-get -y install ${BASE_PACKAGE} ${EXTEND} &&\
@@ -27,8 +28,6 @@ RUN \
  mv ${MYSQL_VERSION} ${INSTALL_DIR} &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR} &&\
  ln -s ${CONFIG_DIR}/my.cnf /etc/mysql/my.cnf &&\
- ${INSTALL_DIR}/bin/mysqld --initialize-insecure --user=mysql --basedir=${INSTALL_DIR} --datadir=${BASE_DIR}/data/mysql &&\
- ${INSTALL_DIR}/bin/mysql_ssl_rsa_setup --datadir=${BASE_DIR}/data/mysql &&\
  ln -s ${INSTALL_DIR}/bin/mysql /usr/bin/mysql &&\
  ln -s ${INSTALL_DIR}/bin/mysqld /usr/bin/mysqld &&\
  ln -s ${INSTALL_DIR}/bin/mysqladmin /usr/bin/mysqladmin &&\
@@ -46,6 +45,8 @@ RUN \
  cd /tmp && rm -rf /tmp/*
 
 VOLUME ["${BASE_DIR}/tmp", "${BASE_DIR}/data/mysql", "${BASE_DIR}/logs"]
+
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 3306
 
