@@ -41,6 +41,7 @@ RUN \
  ln -s ${INSTALL_DIR}/bin/mysqld_safe /usr/bin/mysqld_safe &&\
  cd ${INSTALL_DIR} &&\
  rm -rf mysql-test &&\
+ rm -rf /usr/lib/gcc/x86_64-linux-gnu/8/* &&\
  rm -rf lib/libmysqld.a &&\
  cd bin &&\
  rm -rf mysql_client_test mysql_client_test_embedded mysqltest mysqltest_embedded mysqlxtest mysql_install_db &&\
