@@ -4,17 +4,17 @@
 
 ```
 debian: ^10.0
-mysql: ^8.0.25
+mysql: ^5.7.34
 ```
 
 ## 常用命令：
 
 ```sh
 # 拉取镜像
-$ docker pull seffeng/mysql:8.0
+$ docker pull seffeng/mysql:5.7
 
 # 运行，注意：配置<data-dir>运行将失败，请查看备注说明
-$ docker run --name mysql-test -d -p <port>:3306 -v <data-dir>:/opt/websrv/data/mysql -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/mysql:8.0
+$ docker run --name mysql-test -d -p <port>:3306 -v <data-dir>:/opt/websrv/data/mysql -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/mysql:5.7
 
 # 查看正在运行的容器
 $ docker ps
@@ -49,7 +49,7 @@ $ docker rmi [IMAGE ID]
 $ docker network create network-01
 
 ## 运行容器增加 --network network-01 --network-alias [name-net-alias]
-$ docker run --name mysql-alias1 --network network-01 --network-alias mysql-alias1 -d -p 3306:3306 -v /opt/websrv/data/mysql:/opt/websrv/data/mysql -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql:8.0
+$ docker run --name mysql-alias1 --network network-01 --network-alias mysql-alias1 -d -p 3306:3306 -v /opt/websrv/data/mysql:/opt/websrv/data/mysql -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql:5.7
 ```
 #### 若需要链接容器外部数据库目录`<data-dir>`，操作步骤如下：
 
@@ -58,7 +58,7 @@ $ docker run --name mysql-alias1 --network network-01 --network-alias mysql-alia
 1、运行
 
 ```shell
-$ docker run --name mysql-tmp -it -v <tmp-dir>:/opt/websrv/tmp seffeng/mysql:8.0 bash
+$ docker run --name mysql-tmp -it -v <tmp-dir>:/opt/websrv/tmp seffeng/mysql:5.7 bash
 ```
 
 2、打包原有数据库目录:
@@ -79,7 +79,7 @@ $ mkdir -p <log-dir> && chmod 777 <log-dir>
 5、运行新容器
 
 ```shell
-$ docker run --name mysql-test -d -p <port>:3306 -v /data/mysql:/opt/websrv/data/mysql -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/mysql:8.0
+$ docker run --name mysql-test -d -p <port>:3306 -v /data/mysql:/opt/websrv/data/mysql -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/mysql:5.7
 ```
 
 ##### 方法二（建议）：
@@ -87,7 +87,7 @@ $ docker run --name mysql-test -d -p <port>:3306 -v /data/mysql:/opt/websrv/data
 1、运行
 
 ```shell
-$ docker run --name mysql-tmp -it -v <data-dir>:/opt/websrv/data/mysql seffeng/mysql:8.0 bash
+$ docker run --name mysql-tmp -it -v <data-dir>:/opt/websrv/data/mysql seffeng/mysql:5.7 bash
 ```
 
 2、重新生成数据库，此时数据库账号：root，密码为空，仅能 localhost 访问
@@ -105,13 +105,13 @@ $ mkdir -p <tmp-dir> && chmod 777 <tmp-dir>
 4、运行新容器
 
 ```shell
-$ docker run --name mysql-test -d -p <port>:3306 -v <data-dir>:/opt/websrv/data/mysql -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/mysql:8.0
+$ docker run --name mysql-test -d -p <port>:3306 -v <data-dir>:/opt/websrv/data/mysql -v <tmp-dir>:/opt/websrv/tmp -v <log-dir>:/opt/websrv/logs seffeng/mysql:5.7
 ```
 
 5、完整示例
 
 ```shell
-$ docker run --name mysql-tmp -it -v /opt/websrv/data/mysql:/opt/websrv/data/mysql seffeng/mysql:8.0 bash
+$ docker run --name mysql-tmp -it -v /opt/websrv/data/mysql:/opt/websrv/data/mysql seffeng/mysql:5.7 bash
 
 # 容器内操作
 $ mysqld --initialize-insecure --user=mysql --datadir=/opt/websrv/data/mysql
@@ -122,5 +122,5 @@ $ mkdir -p /opt/websrv/tmp && chmod 777 /opt/websrv/tmp
 $ mkdir -p /opt/websrv/logs && chmod 777 /opt/websrv/logs
 
 #运行新容器
-$ docker run --name mysql-alias1 -d -p 3306:3306 -v /opt/websrv/data/mysql:/opt/websrv/data/mysql -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql:8.0
+$ docker run --name mysql-alias1 -d -p 3306:3306 -v /opt/websrv/data/mysql:/opt/websrv/data/mysql -v /opt/websrv/tmp:/opt/websrv/tmp -v /opt/websrv/logs/mysql:/opt/websrv/logs seffeng/mysql:5.7
 ```
