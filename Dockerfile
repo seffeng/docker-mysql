@@ -1,6 +1,6 @@
 FROM seffeng/debian:latest
 
-MAINTAINER  seffeng "seffeng@sina.cn"
+MAINTAINER seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
@@ -16,7 +16,7 @@ WORKDIR /tmp
 COPY    conf ./conf
 
 RUN \
- apt-get update && apt-get -y install ${BASE_PACKAGE} ${EXTEND} &&\
+ apt-get update && apt-get -y --no-install-recommends install ${BASE_PACKAGE} ${EXTEND} &&\
  wget ${MYSQL_URL} &&\
  xz -d ${MYSQL_VERSION}.tar.xz &&\
  tar -xf ${MYSQL_VERSION}.tar &&\
