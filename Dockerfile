@@ -14,6 +14,7 @@ ENV MYSQL_URL="https://dev.mysql.com/get/Downloads/MySQL-8.0/${MYSQL_VERSION}.ta
 
 WORKDIR /tmp
 COPY    conf ./conf
+COPY    docker-entrypoint.sh /usr/local/bin/
 
 RUN \
  apt-get update && apt-get -y install ${BASE_PACKAGE} ${EXTEND} &&\
@@ -24,8 +25,6 @@ RUN \
  rm -rf ${INSTALL_DIR} &&\
  groupadd mysql && useradd -M -s /sbin/nologin -g mysql mysql &&\
  chown -R mysql:mysql ${BASE_DIR}/data/mysql ${BASE_DIR}/logs ${BASE_DIR}/tmp &&\
- ${INSTALL_DIR}/bin/mysqld --initialize-insecure --user=mysql --basedir=${INSTALL_DIR} --datadir=${BASE_DIR}/data/mysql &&\
- ${INSTALL_DIR}/bin/mysql_ssl_rsa_setup --datadir=${BASE_DIR}/data/mysql &&\
  mv ${MYSQL_VERSION} ${INSTALL_DIR} &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR} &&\
  ln -s ${CONFIG_DIR}/my.cnf /etc/mysql/my.cnf &&\
@@ -46,6 +45,8 @@ RUN \
  cd /tmp && rm -rf /tmp/*
 
 VOLUME ["${BASE_DIR}/tmp", "${BASE_DIR}/data/mysql", "${BASE_DIR}/logs"]
+
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 3306
 

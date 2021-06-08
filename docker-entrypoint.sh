@@ -1,7 +1,7 @@
 #!/bin/bash
 
 init_database_dir() {
-    if [ ! -d ${BASE_DIR}/data/mysql ]; then
+    if [ ! -d ${BASE_DIR}/data/mysql/mysql ]; then
         mkdir -p ${BASE_DIR}/data/mysql
         chown -R mysql:mysql ${BASE_DIR}/data/mysql ${BASE_DIR}/logs ${BASE_DIR}/tmp
         ${INSTALL_DIR}/bin/mysqld --initialize-insecure --user=mysql --basedir=${INSTALL_DIR} --datadir=${BASE_DIR}/data/mysql
