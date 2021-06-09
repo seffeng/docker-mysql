@@ -17,7 +17,7 @@ RUN \
  apt-get update && apt-get -y install ${BASE_PACKAGE} &&\
  gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "${GPU_KEY}" &&\
  gpg --batch --export "${GPU_KEY}" > /etc/apt/trusted.gpg.d/mysql.gpg &&\
- echo 'deb http://repo.mysql.com/apt/debian/ buster mysql-${MYSQL_VERSION}' > /etc/apt/sources.list.d/mysql.list &&\
+ echo "deb http://repo.mysql.com/apt/debian/ buster mysql-${MYSQL_VERSION}" > /etc/apt/sources.list.d/mysql.list &&\
  echo mysql-community-server mysql-community-server/root-pass password '' | debconf-set-selections &&\
  echo mysql-community-server mysql-community-server/re-root-pass password '' | debconf-set-selections &&\
  mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR} ${BASE_DIR}/data/mysql &&\
