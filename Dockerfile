@@ -7,6 +7,7 @@ ENV BASE_DIR="/opt/websrv"
 ENV MYSQL_VERSION=5.7\
  CONFIG_DIR="${BASE_DIR}/config/mysql"\
  GPU_KEY="8C718D3B5072E1F5"\
+ MYSQL_PASSWORD=""\
  BASE_PACKAGE="gnupg"
 
 WORKDIR /tmp
@@ -18,8 +19,8 @@ RUN \
  gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "${GPU_KEY}" &&\
  gpg --batch --export "${GPU_KEY}" > /etc/apt/trusted.gpg.d/mysql.gpg &&\
  echo "deb http://repo.mysql.com/apt/debian/ buster mysql-${MYSQL_VERSION}" > /etc/apt/sources.list.d/mysql.list &&\
- echo mysql-community-server mysql-community-server/root-pass password '' | debconf-set-selections &&\
- echo mysql-community-server mysql-community-server/re-root-pass password '' | debconf-set-selections &&\
+ echo mysql-community-server mysql-community-server/root-pass password "${MYSQL_PASSWORD}" | debconf-set-selections &&\
+ echo mysql-community-server mysql-community-server/re-root-pass password "${MYSQL_PASSWORD}" | debconf-set-selections &&\
  mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR} ${BASE_DIR}/data/mysql &&\
  apt-get update && apt-get -y install mysql-server &&\
  chown -R mysql:mysql ${BASE_DIR}/data/mysql ${BASE_DIR}/logs ${BASE_DIR}/tmp &&\
