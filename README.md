@@ -52,6 +52,10 @@ $ docker rmi [IMAGE ID]
 # 登录后修改密码
 $ ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
 $ FLUSH PRIVILEGES;
+
+# 创建用户
+$ CREATE USER 'root'@'%' IDENTIFIED BY 'password';
+$ GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION;
 ```
 ```shell
 # 建议容器之间使用网络互通
