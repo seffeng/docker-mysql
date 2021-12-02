@@ -4,7 +4,7 @@ MAINTAINER seffeng "seffeng@sina.cn"
 
 ENV BASE_DIR="/opt/websrv"
 
-ENV MYSQL_VERSION=mysql-8.0.25-linux-glibc2.17-x86_64-minimal\
+ENV MYSQL_VERSION=mysql-8.0.27-linux-glibc2.17-x86_64-minimal\
  CONFIG_DIR="${BASE_DIR}/config/mysql"\
  INSTALL_DIR="${BASE_DIR}/program/mysql"\
  BASE_PACKAGE="wget xz-utils"\
