@@ -2,15 +2,15 @@
 
 ## 版本说明
 
-* [mariadb-10.5](https://github.com/seffeng/docker-mysql/tree/mariadb) , [latest](https://github.com/seffeng/docker-mysql/tree/mariadb)
-* [8.0.27](https://github.com/seffeng/docker-mysql/tree/8.0)
-* [5.7.36](https://github.com/seffeng/docker-mysql/tree/5.7)
+* [mariadb-10.6 , latest](https://github.com/seffeng/docker-mysql/tree/mariadb)
+* [8.0.28](https://github.com/seffeng/docker-mysql/tree/8.0)
+* [5.7.37](https://github.com/seffeng/docker-mysql/tree/5.7)
 
 ## 环境
 
 ```
-debian: ^11.1
-mysql: ^8.0.27
+debian: ^11.2
+mysql: ^8.0.28
 ```
 
 ## 常用命令：
