@@ -6,13 +6,6 @@
 * [8.0.28](https://github.com/seffeng/docker-mysql/tree/8.0)
 * [5.7.37](https://github.com/seffeng/docker-mysql/tree/5.7)
 
-## 环境
-
-```
-debian: ^10.0
-mysql: ^8.0.28
-```
-
 ## 常用命令：
 
 ```sh
