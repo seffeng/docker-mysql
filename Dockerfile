@@ -1,45 +1,34 @@
 FROM seffeng/debian:latest
 
-MAINTAINER seffeng "seffeng@sina.cn"
+MAINTAINER  seffeng "seffeng@sina.cn"
 
 ENV BASE_DIR="/opt/websrv"
 
-ENV MYSQL_VERSION=mysql-5.7.37-linux-glibc2.12-x86_64\
+ENV MYSQL_VERSION=5.7\
  CONFIG_DIR="${BASE_DIR}/config/mysql"\
- INSTALL_DIR="${BASE_DIR}/program/mysql"\
- BASE_PACKAGE="wget"\
- EXTEND="libaio-dev libnuma-dev libncurses5"
-
-ENV MYSQL_URL="https://dev.mysql.com/get/Downloads/MySQL-5.7/${MYSQL_VERSION}.tar.gz"
+ GPU_KEY="8C718D3B5072E1F5"\
+ MYSQL_PASSWORD=""\
+ BASE_PACKAGE="gnupg"\
+ EXTEND="openssl"
 
 WORKDIR /tmp
 COPY    conf ./conf
 COPY    docker-entrypoint.sh /usr/local/bin/
 
 RUN \
- apt-get update && apt-get -y install ${BASE_PACKAGE} ${EXTEND} &&\
- wget ${MYSQL_URL} &&\
- tar -xf ${MYSQL_VERSION}.tar.gz &&\
- mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR} ${INSTALL_DIR} ${BASE_DIR}/data/mysql /etc/mysql &&\
- rm -rf ${INSTALL_DIR} &&\
- groupadd mysql && useradd -M -s /sbin/nologin -g mysql mysql &&\
+ apt-get update && apt-get -y --no-install-recommends install ${BASE_PACKAGE} ${EXTEND} &&\
+ gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "${GPU_KEY}" &&\
+ gpg --batch --export "${GPU_KEY}" > /etc/apt/trusted.gpg.d/mysql.gpg &&\
+ echo "deb http://repo.mysql.com/apt/debian/ bullseye mysql-${MYSQL_VERSION}" > /etc/apt/sources.list.d/mysql.list &&\
+ echo mysql-community-server mysql-community-server/root-pass password "${MYSQL_PASSWORD}" | debconf-set-selections &&\
+ echo mysql-community-server mysql-community-server/re-root-pass password "${MYSQL_PASSWORD}" | debconf-set-selections &&\
+ mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR} ${BASE_DIR}/data/mysql &&\
+ apt-get update && apt-get -y install mysql-server &&\
  chown -R mysql:mysql ${BASE_DIR}/data/mysql ${BASE_DIR}/logs ${BASE_DIR}/tmp &&\
- mv ${MYSQL_VERSION} ${INSTALL_DIR} &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR} &&\
+ mv /etc/mysql/my.cnf /etc/mysql/my.cnf.bak &&\
  ln -s ${CONFIG_DIR}/my.cnf /etc/mysql/my.cnf &&\
- ln -s ${INSTALL_DIR}/bin/mysql /usr/bin/mysql &&\
- ln -s ${INSTALL_DIR}/bin/mysqld /usr/bin/mysqld &&\
- ln -s ${INSTALL_DIR}/bin/mysqladmin /usr/bin/mysqladmin &&\
- ln -s ${INSTALL_DIR}/bin/mysqlbinlog /usr/bin/mysqlbinlog &&\
- ln -s ${INSTALL_DIR}/bin/mysqlcheck /usr/bin/mysqlcheck &&\
- ln -s ${INSTALL_DIR}/bin/mysql_config /usr/bin/mysql_config &&\
- ln -s ${INSTALL_DIR}/bin/mysqldump /usr/bin/mysqldump &&\
- ln -s ${INSTALL_DIR}/bin/mysqlimport /usr/bin/mysqlimport &&\
- ln -s ${INSTALL_DIR}/bin/mysqlshow /usr/bin/mysqlshow &&\
- ln -s ${INSTALL_DIR}/bin/mysqlslap /usr/bin/mysqlslap &&\
- ln -s ${INSTALL_DIR}/bin/mysqld_safe /usr/bin/mysqld_safe &&\
- rm -rf ${INSTALL_DIR}/bin/mysql_client_test_embedded ${INSTALL_DIR}/bin/mysql_embedded ${INSTALL_DIR}/bin/mysqld-debug &&\
- rm -rf ${INSTALL_DIR}/bin/mysqltest_embedded ${INSTALL_DIR}/bin/mysqlxtest ${INSTALL_DIR}/bin/mysql_install_db &&\
+ rm -rf /usr/bin/mysql_install_db /usr/sbin/mysqld-debug &&\
  apt-get -y remove ${BASE_PACKAGE} &&\
  apt-get clean &&\
  rm -rf /var/cache/apt/* &&\
