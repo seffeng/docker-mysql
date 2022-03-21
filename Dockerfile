@@ -38,6 +38,8 @@ RUN \
  ln -s ${INSTALL_DIR}/bin/mysqlshow /usr/bin/mysqlshow &&\
  ln -s ${INSTALL_DIR}/bin/mysqlslap /usr/bin/mysqlslap &&\
  ln -s ${INSTALL_DIR}/bin/mysqld_safe /usr/bin/mysqld_safe &&\
+ rm -rf ${INSTALL_DIR}/bin/mysql_client_test_embedded ${INSTALL_DIR}/bin/mysql_embedded ${INSTALL_DIR}/bin/mysqld-debug &&\
+ rm -rf ${INSTALL_DIR}/bin/mysqltest_embedded ${INSTALL_DIR}/bin/mysqlxtest ${INSTALL_DIR}/bin/mysql_install_db &&\
  apt-get -y remove ${BASE_PACKAGE} &&\
  apt-get clean &&\
  rm -rf /var/cache/apt/* &&\
