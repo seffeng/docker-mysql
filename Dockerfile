@@ -1,4 +1,4 @@
-FROM seffeng/debian:latest
+FROM seffeng/debian:10
 
 MAINTAINER  seffeng "seffeng@sina.cn"
 
@@ -19,7 +19,7 @@ RUN \
  apt-get update && apt-get -y --no-install-recommends install ${BASE_PACKAGE} ${EXTEND} &&\
  gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "${GPU_KEY}" &&\
  gpg --batch --export "${GPU_KEY}" > /etc/apt/trusted.gpg.d/mysql.gpg &&\
- echo "deb http://repo.mysql.com/apt/debian/ bullseye mysql-${MYSQL_VERSION}" > /etc/apt/sources.list.d/mysql.list &&\
+ echo "deb http://repo.mysql.com/apt/debian/ buster mysql-${MYSQL_VERSION}" > /etc/apt/sources.list.d/mysql.list &&\
  echo mysql-community-server mysql-community-server/root-pass password "${MYSQL_PASSWORD}" | debconf-set-selections &&\
  echo mysql-community-server mysql-community-server/re-root-pass password "${MYSQL_PASSWORD}" | debconf-set-selections &&\
  mkdir -p ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR} ${BASE_DIR}/data/mysql &&\
