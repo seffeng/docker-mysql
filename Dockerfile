@@ -30,6 +30,7 @@ RUN \
  ln -s ${CONFIG_DIR}/my.cnf /etc/mysql/my.cnf &&\
  rm -rf /usr/bin/mysql_install_db /usr/sbin/mysqld-debug &&\
  apt-get -y remove ${BASE_PACKAGE} &&\
+ apt-get -y autoremove &&\
  apt-get clean &&\
  rm -rf /var/cache/apt/* &&\
  cd /tmp && rm -rf /tmp/*
