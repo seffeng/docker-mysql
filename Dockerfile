@@ -6,7 +6,7 @@ ENV BASE_DIR="/opt/websrv"
 
 ENV MYSQL_VERSION=5.7\
  CONFIG_DIR="${BASE_DIR}/config/mysql"\
- GPU_KEY="8C718D3B5072E1F5"\
+ GPU_KEY="467B942D3A79BD29"\
  MYSQL_PASSWORD=""\
  BASE_PACKAGE="gnupg"\
  EXTEND="openssl"
@@ -17,7 +17,7 @@ COPY    docker-entrypoint.sh /usr/local/bin/
 
 RUN \
  apt-get update && apt-get -y --no-install-recommends install ${BASE_PACKAGE} ${EXTEND} &&\
- gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "${GPU_KEY}" &&\
+ gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "${GPU_KEY}" &&\
  gpg --batch --export "${GPU_KEY}" > /etc/apt/trusted.gpg.d/mysql.gpg &&\
  echo "deb http://repo.mysql.com/apt/debian/ buster mysql-${MYSQL_VERSION}" > /etc/apt/sources.list.d/mysql.list &&\
  echo mysql-community-server mysql-community-server/root-pass password "${MYSQL_PASSWORD}" | debconf-set-selections &&\
