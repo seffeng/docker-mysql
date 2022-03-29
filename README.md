@@ -2,7 +2,7 @@
 
 ## 版本说明
 
-* [mariadb-10.6 , latest](https://github.com/seffeng/docker-mysql/tree/mariadb)
+* [mariadb-10.6.7 , latest](https://github.com/seffeng/docker-mysql/tree/mariadb)
 * [8.0.28](https://github.com/seffeng/docker-mysql/tree/8.0)
 * [5.7.37](https://github.com/seffeng/docker-mysql/tree/5.7)
 
