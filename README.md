@@ -39,8 +39,21 @@ $ docker rmi [IMAGE ID]
 
 ## 备注
 
-```
+```shell
 # mysql 初始账号：root；初始密码：空
+
+# 登录后修改密码
+$ ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+$ FLUSH PRIVILEGES;
+
+# 创建用户
+$ CREATE USER 'root'@'%' IDENTIFIED BY 'password';
+$ GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION;
+
+## mysql8 密码验证方式修改
+$ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+## 或修改配置文件，在[mysqld]中添加下边的代码 
+default_authentication_plugin=mysql_native_password
 ```
 ```shell
 # 建议容器之间使用网络互通
