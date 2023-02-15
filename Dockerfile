@@ -1,10 +1,10 @@
-FROM seffeng/debian:latest
+FROM seffeng/debian:11
 
-MAINTAINER seffeng "seffeng@sina.cn"
+LABEL author="zxf <seffeng@live.com>"
 
 ENV BASE_DIR="/opt/websrv"
 
-ENV MYSQL_VERSION=mysql-8.0.29-linux-glibc2.17-x86_64-minimal\
+ENV MYSQL_VERSION=mysql-8.0.32-linux-glibc2.17-x86_64-minimal\
  CONFIG_DIR="${BASE_DIR}/config/mysql"\
  INSTALL_DIR="${BASE_DIR}/program/mysql"\
  BASE_PACKAGE="wget xz-utils"\
