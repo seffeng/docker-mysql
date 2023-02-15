@@ -1,6 +1,6 @@
 FROM seffeng/debian:10
 
-MAINTAINER  seffeng "seffeng@sina.cn"
+LABEL author="zxf <seffeng@live.com>"
 
 ENV BASE_DIR="/opt/websrv"
 
