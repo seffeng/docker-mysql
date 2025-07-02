@@ -1,4 +1,4 @@
-FROM seffeng/alpine:3.19
+FROM seffeng/alpine:3.21
 
 LABEL author="zxf <seffeng@live.com>"
 

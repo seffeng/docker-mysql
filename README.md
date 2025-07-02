@@ -2,13 +2,13 @@
 
 ## 版本说明
 
-* [mariadb-10.11 , latest](https://github.com/seffeng/docker-mysql/tree/mariadb)
+* [mariadb-11.4 , latest](https://github.com/seffeng/docker-mysql/tree/mariadb)
 
 ## 环境
 
 ```
-alpine: ^3.19
-mariadb: ^10.11
+alpine: ^3.21
+mariadb: ^11.4
 ```
 
 ## 常用命令：
