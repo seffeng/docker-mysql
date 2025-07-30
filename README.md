@@ -7,8 +7,8 @@
 ## 环境
 
 ```
-alpine: ^3.21
-mariadb: ^11.4
+alpine: ^3.20
+mariadb: ^10.11
 ```
 
 ## 常用命令：
